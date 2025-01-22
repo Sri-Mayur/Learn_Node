@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Sri-Mayur/Learn_Node/issues"
   },
-  "homepage": "https://github.com/Sri-Mayur/Learn_Node#readme"
+  "homepage": "https://github.com/Sri-Mayur/Learn_Node#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
