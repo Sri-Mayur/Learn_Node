@@ -1,15 +1,34 @@
-var fs = require('fs'); // File System
-var os = require('os'); // Operating System
-var notes = require('./notes.js'); // Importing notes.js file
-var _ = require('lodash'); // Lodash library
+const express = require('express');
 
-notes.printNotes("ABCD"); 
-console.log(notes.message);
-var user = os.userInfo(); // Getting user information
-var date = new Date(); // Getting current date and time
-var log = `User: ${user.username} - Date: ${date}`; // Creating a log
-console.log(log); // Logging the log
+const app = express();
+const port = 3000;
 
-// Using lodash
-var filteredArray = _.uniq(['Mayur', 1, 'Mayur', 1, 2, 3, 4]);
-console.log(filteredArray);
+// Middleware for parsing JSON
+app.use(express.json());
+
+// Basic route
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+// Sample data
+const items = [
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' }
+];
+
+// GET all items
+app.get('/api/items', (req, res) => {
+    res.json(items);
+});
+
+// GET single item
+app.get('/api/items/:id', (req, res) => {
+    const item = items.find(i => i.id === parseInt(req.params.id));
+    if (!item) return res.status(404).send('Item not found');
+    res.json(item);
+});
